@@ -9,7 +9,7 @@ const contactsPath = path.resolve('./db/contacts.json');
 async function listContacts() {
     try {
         const contactsData = await fs.readFile(contactsPath, 'utf8');
-        console.table(contactsData)
+        console.table(JSON.parse(contactsData))
     } catch (error) {
         console.error(error);
     }
@@ -18,7 +18,7 @@ async function listContacts() {
 async function getContactById(contactId) {
     try {
         const contactsData = await fs.readFile(contactsPath, 'utf8');
-        const contactById = JSON.parse(contactsData).find(contact => Number(contact.id) === contactId);
+        const contactById = JSON.parse(contactsData).find(contact => contact.id === contactId);
         console.table(contactById);
     } catch (error) {
         console.error(error);
@@ -28,7 +28,7 @@ async function getContactById(contactId) {
 async function removeContact(contactId) {
     try {
         const contactsData = await fs.readFile(contactsPath, 'utf8');
-        const contactById = JSON.parse(contactsData).filter(contact => Number(contact.id) !== contactId);
+        const contactById = JSON.parse(contactsData).filter(contact => contact.id !== contactId);
         console.table(contactById);
     } catch (error) {
         console.error(error);
